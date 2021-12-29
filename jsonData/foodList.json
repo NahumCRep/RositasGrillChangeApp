@@ -1,0 +1,256 @@
+{
+    "food":[
+        {
+            "id": "ord1",
+            "name": "1 Bollo con carne",
+            "price": 3.00,
+            "category": "comida",
+            "combo": "si"
+        },
+        {
+            "id": "ord2",
+            "name": "1 Empanada con carne",
+            "price": 3.00,
+            "category": "comida",
+            "combo": "si"
+        },
+        {
+            "id": "ord3",
+            "name": "2 Tortillas con carne",
+            "price": 3.00,
+            "category": "comida",
+            "combo": "si"
+        },
+        {
+            "id": "ord4",
+            "name": "Yuca con carne",
+            "price": 3.00,
+            "category": "comida",
+            "combo": "si"
+        },
+        {
+            "id": "ord5",
+            "name": "Empanada",
+            "price": 0.50,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord6",
+            "name": "Ojaldre",
+            "price": 0.40,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord7",
+            "name": "Salchicha frita",
+            "price": 0.40,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord8",
+            "name": "Huevo",
+            "price": 0.30,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord9",
+            "name": "Muslo",
+            "price": 0.80,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord10",
+            "name": "Alitas",
+            "price": 0.65,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord11",
+            "name": "Encuentro",
+            "price": 1.00,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord12",
+            "name": "Pechuga",
+            "price": 1.25,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord13",
+            "name": "Tortilla",
+            "price": 0.20,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord14",
+            "name": "Queso amarillo",
+            "price": 0.25,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord15",
+            "name": "Tortilla asada",
+            "price": 0.50,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord16",
+            "name": "Tortilla asada con queso",
+            "price": 0.85,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord17",
+            "name": "Carne frita pequeña",
+            "price": 0.80,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord18",
+            "name": "Carne frita mediana",
+            "price": 1.00,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord19",
+            "name": "Carne frita grande",
+            "price": 1.20,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord20",
+            "name": "Yuca x2",
+            "price": 0.25,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord21",
+            "name": "Bollo",
+            "price": 0.50,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord22",
+            "name": "Moyeja unidad",
+            "price": 0.20,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord23",
+            "name": "Ensalada de papa",
+            "price": 0.65,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord24",
+            "name": "Ensalada verde",
+            "price": 0.50,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord25",
+            "name": "Orden de Arroz",
+            "price": 0.50,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord26",
+            "name": "Orden Minestra",
+            "price": 0.50,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord27",
+            "name": "Patacón unidad",
+            "price": 0.05,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord28",
+            "name": "Tajadas x2",
+            "price": 0.25,
+            "category": "comida",
+            "combo": "no"
+        },
+        {
+            "id": "ord29",
+            "name": "Café negro",
+            "price": 0.50,
+            "category": "bebida",
+            "combo": "no"
+        },
+        {
+            "id": "ord30",
+            "name": "Café con leche",
+            "price": 0.65,
+            "category": "bebida",
+            "combo": "no"
+        },
+        {
+            "id": "ord31",
+            "name": "Té",
+            "price": 0.40,
+            "category": "bebida",
+            "combo": "no"
+        },
+        {
+            "id": "ord32",
+            "name": "Té con leche",
+            "price": 0.50,
+            "category": "bebida",
+            "combo": "no"
+        },
+        {
+            "id": "ord33",
+            "name": "Soda lata",
+            "price": 1.00,
+            "category": "bebida",
+            "combo": "no"
+        },
+        {
+            "id": "ord34",
+            "name": "Soda pequeña",
+            "price": 0.80,
+            "category": "bebida",
+            "combo": "no"
+        },
+        {
+            "id": "ord35",
+            "name": "Soda 1/2",
+            "price": 1.25,
+            "category": "bebida",
+            "combo": "no"
+        },
+        {
+            "id": "dev",
+            "name": "Delivery",
+            "price": 0.25,
+            "category": "devilery",
+            "combo": "no"
+        }
+    ]
+}
