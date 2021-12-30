@@ -14,10 +14,14 @@ import FoodItem from '../components/FoodItem';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import FontAwIcon from 'react-native-vector-icons/FontAwesome';
 import {openMyDatabase} from '../DataBaseConn/DataBaseConnection';
+import ModalComp from '../components/ModalComp';
 
 const db = openMyDatabase.getConnection();
 const Home = () => {
     const [dbRes, setdbRes] = useState([]);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalOperation, setModalOperation] = useState('');
+    const [foodID, setFoodID] = useState('');
     // useEffect(() => {
     //     db.transaction(
     //         (tx) => {
@@ -81,9 +85,15 @@ const Home = () => {
     //         forceUpdate
     //       )
     // }
-    // const updateFood = (id) => {
-    //     console.log(id);
-    // }
+    const updateFood = (id) => {
+        console.log(id);
+    }
+
+    const showModal = (modOperation, id) => {
+        setModalVisible(!modalVisible);
+        setModalOperation(modOperation);
+        setFoodID(id);
+    }
 
     return (
         <ScrollView style={{paddingLeft: 5, paddingRight: 5}}>
@@ -117,6 +127,7 @@ const Home = () => {
                 <Text style={{fontSize: 18, marginTop: 10}}>Listado</Text>
                 <Button 
                     title='Agregar'
+                    onPress={() => showModal('Agregar Producto', '')}
                 />
             </View>
             <View style={{marginTop: 10}}>
@@ -126,13 +137,13 @@ const Home = () => {
                                 <FoodItem key={foodItem.id} name={foodItem.name} price={foodItem.price}>
                                     <TouchableOpacity
                                         style={[styles.foodBtn, {marginRight: 5, backgroundColor: '#F39C12'}]}
-                                        onPress={() => updateFood(foodItem.id)}
+                                        onPress={() => showModal('Editar Producto', foodItem.id)}
                                     >
                                         <MaterialIcon size={25} name='edit' />
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                         style={[styles.foodBtn, {backgroundColor: '#E74C3C'}]}
-                                        onPress={() => updateFood(foodItem.id)}
+                                        onPress={() => showModal('Eliminar Producto', foodItem.id)}
                                     >
                                         <FontAwIcon size={25} name='times' />
                                     </TouchableOpacity>
@@ -141,6 +152,7 @@ const Home = () => {
                         })
                     }
             </View>
+             <ModalComp modalVisible={modalVisible} handleVisibility={showModal} operation={modalOperation} foodID={foodID} />
         </ScrollView>
     )
 }
