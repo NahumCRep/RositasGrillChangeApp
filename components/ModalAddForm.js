@@ -47,10 +47,6 @@ const ModalAddForm = ({ modalVisible, handleVisibility, operation, foodId, refre
     }
 
     const updateFood = (fID, fName, fPrice, fCategory) => {
-        // console.log(fID);
-        // console.log(fName);
-        // console.log(fPrice);
-        // console.log(fCategory);
         db.transaction(
             (tx) => {
                 tx.executeSql("update food SET name=?, price=?, category=? WHERE id=?",
@@ -73,8 +69,8 @@ const ModalAddForm = ({ modalVisible, handleVisibility, operation, foodId, refre
                 (tx) => {
                     tx.executeSql("select * from food where id = ?", [foodId], (_, { rows: { _array } }) => {
                         // setdbRes(_array)
-                        console.log(_array[0]);
-                        let precio = _array[0].price.toString();
+                        // console.log(_array[0]);
+                        // let precio = _array[0].price.toString();
                         setFoodObject({
                             foodid: _array[0].id,
                             foodname: _array[0].name,
