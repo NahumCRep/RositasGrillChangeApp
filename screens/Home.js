@@ -9,24 +9,28 @@ import {
     TouchableOpacity 
 } from 'react-native';
 import logo from '../assets/logoName.png';
-import * as SQLite from 'expo-sqlite'
+import * as SQLite from 'expo-sqlite';
 import FoodItem from '../components/FoodItem';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import FontAwIcon from 'react-native-vector-icons/FontAwesome';
 import {openMyDatabase} from '../DataBaseConn/DataBaseConnection';
-import ModalComp from '../components/ModalComp';
+import ModalAddForm from '../components/ModalAddForm';
+import ModalDeleteForm from '../components/ModalDeleteForm';
+import HeaderCategories from '../components/HeaderCategories';
 
 const db = openMyDatabase.getConnection();
 const Home = () => {
     const [dbRes, setdbRes] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
+    const [modalDeleteVisible, setModalDeleteVisible] = useState(false);
     const [modalOperation, setModalOperation] = useState('');
     const [foodID, setFoodID] = useState('');
+    const [foodName, setFoodName] = useState('');
     // useEffect(() => {
     //     db.transaction(
     //         (tx) => {
-    //             tx.executeSql("insert into food (id, name, price, category, combo) values (?, ?, ?, ? , ?)",
-    //                 ['test', 'testname', 0.50, 'testcat', 'no']);
+    //             tx.executeSql("insert into food (id, name, price, category) values (?, ?, ?, ?)",
+    //                 ['test', 'testname', 0.50, 'testcat']);
     //             tx.executeSql("select * from food", [], (_, { rows }) =>
     //                 console.log(JSON.stringify(rows))
     //             );
@@ -46,104 +50,67 @@ const Home = () => {
         );
     }
 
-    // const handleDataHook = () => {
-    //     let data = await getData();
-    //     console.log(data);
-    //     // setdbRes(data);
+    // const dropTable = () => {
+    //     db.transaction(tx => {
+    //         tx.executeSql(
+    //             'DROP TABLE food;',
+    //             [],(tx, results) => {
+    //                 console.log('tabla eliminada')
+    //             },
+    //             (tx, error) => {
+    //                 console.log(error);
+    //             }
+    //         )
+    //     });
     // }
 
-    // const insertFood = () => {
-    //     db.transaction(
-    //         (tx) => {
-    //             tx.executeSql("insert into food (id, name, price, category, combo) values (?, ?, ?, ? , ?)",
-    //                 ['test2', 'testname2', 1.00, 'testcat', 'no']);
-    //         },
-    //         ({tx, error}) => {
-    //             console.log(error);
-    //         }
-    //     );
-    // }
-
-    // const updateFoodItem = ({}) => {
-    //     db.transaction(
-    //         (tx) => {
-    //           tx.executeSql(`update items set done = 1 where id = ?;`, [
-    //             id,
-    //           ]);
-    //         },
-    //         null,
-    //         forceUpdate
-    //       )
-    // }
-
-    // const deleteFoodItem = ({}) => {
-    //     db.transaction(
-    //         (tx) => {
-    //           tx.executeSql(`delete from items where id = ?;`, [id]);
-    //         },
-    //         null,
-    //         forceUpdate
-    //       )
-    // }
-    const updateFood = (id) => {
-        console.log(id);
-    }
-
-    const showModal = (modOperation, id) => {
-        setModalVisible(!modalVisible);
-        setModalOperation(modOperation);
+    const setFoodProps = (id,name) => {
+        setFoodName(name)
         setFoodID(id);
     }
+
+    const showModal = (modOperation, id, name) => {
+        if(modOperation == 'delete'){
+            setModalDeleteVisible(!modalDeleteVisible);
+            setFoodProps(id,name);
+        }else{
+            setModalOperation(modOperation);
+            setModalVisible(!modalVisible);
+            setFoodProps(id,name);
+        }
+    }
+    const refreshData = () => {
+        getData();
+    }
+    
 
     return (
         <ScrollView style={{paddingLeft: 5, paddingRight: 5}}>
             <View style={styles.logoView}>
                 <Image style={styles.logoImg} source={logo} alt="logo" />
             </View>
-            <View style={styles.buttonsView }>
-                <TouchableOpacity
-                    style={[styles.touchBtn, {backgroundColor: '#ff5100'}]}
-                >
-                    <Text>Combos</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.touchBtn, {backgroundColor: '#fbc105'}]}
-                >
-                    <Text>Comida</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.touchBtn, {backgroundColor: '#F39C12'}]}
-                >
-                    <Text>Bebidas</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.touchBtn, {backgroundColor: '#85592d'}]}
-                    onPress={getData}
-                >
-                    <Text>Todo</Text>
-                </TouchableOpacity>
-            </View>
+            <HeaderCategories handleGetData={getData} />
             <View style={styles.listTitle}>
                 <Text style={{fontSize: 18, marginTop: 10}}>Listado</Text>
                 <Button 
                     title='Agregar'
-                    onPress={() => showModal('Agregar Producto', '')}
+                    onPress={() => showModal('add', '', '')}
                 />
             </View>
-            <View style={{marginTop: 10}}>
+            <ScrollView style={{marginTop: 10}}>
                     {
                         dbRes.map((foodItem) => {
                             return (
                                 <FoodItem key={foodItem.id} name={foodItem.name} price={foodItem.price}>
                                     <TouchableOpacity
                                         style={[styles.foodBtn, {marginRight: 5, backgroundColor: '#F39C12'}]}
-                                        onPress={() => showModal('Editar Producto', foodItem.id)}
+                                        onPress={() => showModal('edit', foodItem.id, '')}
                                     >
                                         <MaterialIcon size={25} name='edit' />
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                         style={[styles.foodBtn, {backgroundColor: '#E74C3C'}]}
-                                        onPress={() => showModal('Eliminar Producto', foodItem.id)}
+                                        onPress={() => showModal('delete', foodItem.id, foodItem.name)}
                                     >
                                         <FontAwIcon size={25} name='times' />
                                     </TouchableOpacity>
@@ -151,8 +118,21 @@ const Home = () => {
                             )
                         })
                     }
-            </View>
-             <ModalComp modalVisible={modalVisible} handleVisibility={showModal} operation={modalOperation} foodID={foodID} />
+            </ScrollView>
+             <ModalAddForm 
+                modalVisible={modalVisible} 
+                handleVisibility={showModal} 
+                operation={modalOperation}
+                foodId={foodID}
+                refresh={refreshData}
+            />
+             <ModalDeleteForm 
+                modalDeleteVisible={modalDeleteVisible}  
+                handleVisibility={showModal}
+                productId={foodID}
+                productName={foodName}
+                refresh={refreshData} 
+            />
         </ScrollView>
     )
 }

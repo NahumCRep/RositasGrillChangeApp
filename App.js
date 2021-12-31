@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import AppNavigation from './components/AppNavigation';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -19,10 +20,10 @@ function openDatabase() {
 }
 const db = openDatabase();
 export default function App() {
-    // useEffect(() => {
+  //   useEffect(() => {
   //   db.transaction((tx) => {
   //     tx.executeSql(
-  //       "create table if not exists food (id text primary key not null, name text, price real, category text, combo text);"
+  //       "create table if not exists food (id text primary key not null, name text, price real, category text);"
   //     );
   //   });
   // }, []);
