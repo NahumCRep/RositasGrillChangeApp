@@ -4,22 +4,25 @@ const HeaderCategories = ({handleGetData}) => {
         <View style={styles.buttonsView}>
             <TouchableOpacity
                 style={[styles.touchBtn, { backgroundColor: '#ff5100' }]}
+                onPress={() => handleGetData('combo')}
             >
                 <Text>Combos</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={[styles.touchBtn, { backgroundColor: '#fbc105' }]}
+                onPress={() => handleGetData('comida')}
             >
                 <Text>Comida</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={[styles.touchBtn, { backgroundColor: '#F39C12' }]}
+                onPress={() => handleGetData('bebida')}
             >
                 <Text>Bebidas</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 style={[styles.touchBtn, { backgroundColor: '#85592d' }]}
-                onPress={handleGetData}
+                onPress={() => handleGetData()}
             >
                 <Text>Todo</Text>
             </TouchableOpacity>

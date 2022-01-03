@@ -18,6 +18,8 @@ import ModalAddForm from '../components/ModalAddForm';
 import ModalDeleteForm from '../components/ModalDeleteForm';
 import HeaderCategories from '../components/HeaderCategories';
 
+import listado from '../jsonData/foodList.json';
+
 const db = openMyDatabase.getConnection();
 const Home = () => {
     const [dbRes, setdbRes] = useState([]);
@@ -26,6 +28,7 @@ const Home = () => {
     const [modalOperation, setModalOperation] = useState('');
     const [foodID, setFoodID] = useState('');
     const [foodName, setFoodName] = useState('');
+    const [foodCat, setFoodCategory] = useState('');
     // useEffect(() => {
     //     db.transaction(
     //         (tx) => {
@@ -38,6 +41,19 @@ const Home = () => {
     //         null
     //     );
     // }, []);
+
+    useEffect(() => {
+        // console.log(listado.food[0]);
+        db.transaction(
+            (tx) => {
+                listado.food.map(item => {
+                    tx.executeSql("insert into food (id, name, price, category) values (?, ?, ?, ?)",
+                    [item.id, item.name, item.price, item.category]);
+                }) 
+            },
+            null
+        );
+    }, []);
   
     const getData = () => {
         db.transaction(
@@ -49,6 +65,21 @@ const Home = () => {
             }
         );
     }
+
+    const getByCategory = (category) => {
+        db.transaction(
+            (tx) => {
+                tx.executeSql("select * from food where category = ?", [category], (_, { rows: { _array } }) =>  setdbRes(_array));
+            },
+            ({tx, error}) => {
+                console.log(error);
+            }
+        );
+    }
+
+    const handleData = (category) => {
+        category ? getByCategory(category) : getData();
+    } 
 
     // const dropTable = () => {
     //     db.transaction(tx => {
@@ -64,23 +95,25 @@ const Home = () => {
     //     });
     // }
 
-    const setFoodProps = (id,name) => {
-        setFoodName(name)
-        setFoodID(id);
+    const setFoodProps = (id,name,category) => {
+        id ? setFoodID(id) : setFoodID('');
+        name ? setFoodName(name) : setFoodName('');
+        category ? setFoodCategory(category) : setFoodCategory('');
     }
 
-    const showModal = (modOperation, id, name) => {
+    const showModal = (modOperation, id, name, category) => {
         if(modOperation == 'delete'){
             setModalDeleteVisible(!modalDeleteVisible);
-            setFoodProps(id,name);
+            setFoodProps(id,name,category);
         }else{
             setModalOperation(modOperation);
             setModalVisible(!modalVisible);
-            setFoodProps(id,name);
+            setFoodProps(id);
         }
     }
-    const refreshData = () => {
-        getData();
+    const refreshData = (category) => {
+        // getData();
+        handleData(category);
     }
     
 
@@ -89,7 +122,7 @@ const Home = () => {
             <View style={styles.logoView}>
                 <Image style={styles.logoImg} source={logo} alt="logo" />
             </View>
-            <HeaderCategories handleGetData={getData} />
+            <HeaderCategories handleGetData={handleData} />
             <View style={styles.listTitle}>
                 <Text style={{fontSize: 18, marginTop: 10}}>Listado</Text>
                 <Button 
@@ -104,13 +137,13 @@ const Home = () => {
                                 <FoodItem key={foodItem.id} name={foodItem.name} price={foodItem.price}>
                                     <TouchableOpacity
                                         style={[styles.foodBtn, {marginRight: 5, backgroundColor: '#F39C12'}]}
-                                        onPress={() => showModal('edit', foodItem.id, '')}
+                                        onPress={() => showModal('edit', foodItem.id)}
                                     >
                                         <MaterialIcon size={25} name='edit' />
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                         style={[styles.foodBtn, {backgroundColor: '#E74C3C'}]}
-                                        onPress={() => showModal('delete', foodItem.id, foodItem.name)}
+                                        onPress={() => showModal('delete', foodItem.id, foodItem.name, foodItem.category)}
                                     >
                                         <FontAwIcon size={25} name='times' />
                                     </TouchableOpacity>
@@ -131,6 +164,7 @@ const Home = () => {
                 handleVisibility={showModal}
                 productId={foodID}
                 productName={foodName}
+                productCategory={foodCat}
                 refresh={refreshData} 
             />
         </ScrollView>

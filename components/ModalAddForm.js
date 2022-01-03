@@ -37,8 +37,8 @@ const ModalAddForm = ({ modalVisible, handleVisibility, operation, foodId, refre
                     [fID, fName, fPrice, fCategory ? fCategory : 'comida'], (tx, success) => {
                         alert('Producto Registrado Correctamente!!');
                         CleanInputs();
-                        handleVisibility('add', '', '');
-                        refresh();
+                        handleVisibility('add');
+                        refresh(fCategory ? fCategory : 'comida');
                     }, (tx, error) => {
                         console.log(error);
                     });
@@ -53,8 +53,8 @@ const ModalAddForm = ({ modalVisible, handleVisibility, operation, foodId, refre
                     [fName, fPrice, fCategory, fID], (tx, success) => {
                         alert('Producto Actualizado Correctamente!!');
                         CleanInputs();
-                        handleVisibility('edit', '', '');
-                        refresh();
+                        handleVisibility('edit');
+                        refresh(fCategory);
                     }, (tx, error) => {
                         console.log(error);
                     });

@@ -4,14 +4,14 @@ import { openMyDatabase } from '../DataBaseConn/DataBaseConnection';
 
 const db = openMyDatabase.getConnection();
 
-const ModalDeleteForm = ({ modalDeleteVisible, handleVisibility, productId, productName , refresh}) => {
+const ModalDeleteForm = ({ modalDeleteVisible, handleVisibility, productId, productName ,  productCategory, refresh}) => {
     const deleteFoodItem = (id) => {
         db.transaction(
             (tx) => {
                 tx.executeSql(`delete from food where id = ?;`, [id], (tx, success) => {
                     alert('Producto eliminado Correctamente!!');
-                    handleVisibility('delete','','');
-                    refresh();
+                    handleVisibility('delete');
+                    refresh(productCategory);
                 }, (tx, error) => {
                     console.log(error);
                 });
