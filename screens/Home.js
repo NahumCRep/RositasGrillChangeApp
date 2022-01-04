@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react';
-import { 
-    View, 
+import {
+    View,
     Text,
-    ScrollView, 
-    Image, 
-    StyleSheet, 
-    Button, 
-    TouchableOpacity 
+    ScrollView,
+    Image,
+    StyleSheet,
+    Button,
+    TouchableOpacity
 } from 'react-native';
 import logo from '../assets/logoName.png';
 import * as SQLite from 'expo-sqlite';
 import FoodItem from '../components/FoodItem';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import FontAwIcon from 'react-native-vector-icons/FontAwesome';
-import {openMyDatabase} from '../DataBaseConn/DataBaseConnection';
+import { openMyDatabase } from '../DataBaseConn/DataBaseConnection';
 import ModalAddForm from '../components/ModalAddForm';
 import ModalDeleteForm from '../components/ModalDeleteForm';
 import HeaderCategories from '../components/HeaderCategories';
@@ -33,10 +33,10 @@ const Home = () => {
     //     db.transaction(
     //         (tx) => {
     //             tx.executeSql("insert into food (id, name, price, category) values (?, ?, ?, ?)",
-    //                 ['test', 'testname', 0.50, 'testcat']);
-    //             tx.executeSql("select * from food", [], (_, { rows }) =>
-    //                 console.log(JSON.stringify(rows))
-    //             );
+    //                 ['dev', 'Delivery', 0.25, 'delivery']);
+    //             // tx.executeSql("select * from food", [], (_, { rows }) =>
+    //             //     console.log(JSON.stringify(rows))
+    //             // );
     //         },
     //         null
     //     );
@@ -48,19 +48,19 @@ const Home = () => {
             (tx) => {
                 listado.food.map(item => {
                     tx.executeSql("insert into food (id, name, price, category) values (?, ?, ?, ?)",
-                    [item.id, item.name, item.price, item.category]);
-                }) 
+                        [item.id, item.name, item.price, item.category]);
+                })
             },
             null
         );
     }, []);
-  
+
     const getData = () => {
         db.transaction(
             (tx) => {
-                tx.executeSql("select * from food", [], (_, { rows: { _array } }) =>  setdbRes(_array));
+                tx.executeSql("select * from food", [], (_, { rows: { _array } }) => setdbRes(_array));
             },
-            ({tx, error}) => {
+            ({ tx, error }) => {
                 console.log(error);
             }
         );
@@ -69,9 +69,9 @@ const Home = () => {
     const getByCategory = (category) => {
         db.transaction(
             (tx) => {
-                tx.executeSql("select * from food where category = ?", [category], (_, { rows: { _array } }) =>  setdbRes(_array));
+                tx.executeSql("select * from food where category = ?", [category], (_, { rows: { _array } }) => setdbRes(_array));
             },
-            ({tx, error}) => {
+            ({ tx, error }) => {
                 console.log(error);
             }
         );
@@ -79,7 +79,7 @@ const Home = () => {
 
     const handleData = (category) => {
         category ? getByCategory(category) : getData();
-    } 
+    }
 
     // const dropTable = () => {
     //     db.transaction(tx => {
@@ -95,17 +95,17 @@ const Home = () => {
     //     });
     // }
 
-    const setFoodProps = (id,name,category) => {
+    const setFoodProps = (id, name, category) => {
         id ? setFoodID(id) : setFoodID('');
         name ? setFoodName(name) : setFoodName('');
         category ? setFoodCategory(category) : setFoodCategory('');
     }
 
     const showModal = (modOperation, id, name, category) => {
-        if(modOperation == 'delete'){
+        if (modOperation == 'delete') {
             setModalDeleteVisible(!modalDeleteVisible);
-            setFoodProps(id,name,category);
-        }else{
+            setFoodProps(id, name, category);
+        } else {
             setModalOperation(modOperation);
             setModalVisible(!modalVisible);
             setFoodProps(id);
@@ -115,57 +115,66 @@ const Home = () => {
         // getData();
         handleData(category);
     }
-    
+
 
     return (
-        <ScrollView style={{paddingLeft: 5, paddingRight: 5}}>
+        <ScrollView style={{ paddingLeft: 5, paddingRight: 5 }}>
             <View style={styles.logoView}>
                 <Image style={styles.logoImg} source={logo} alt="logo" />
             </View>
             <HeaderCategories handleGetData={handleData} />
             <View style={styles.listTitle}>
-                <Text style={{fontSize: 18, marginTop: 10}}>Listado</Text>
-                <Button 
-                    title='Agregar'
-                    onPress={() => showModal('add', '', '')}
-                />
+                <Text style={{ fontSize: 18, marginTop: 10 }}>Listado</Text>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                   <TouchableOpacity 
+                        style={styles.deliveryIcon}
+                        onPress={() => handleData('delivery')}    
+                    >
+                       <FontAwIcon name='car' size={25} color={'white'}/>
+                   </TouchableOpacity>
+                    <Button
+                        title='Agregar'
+                        color='#000'
+                        onPress={() => showModal('add', '', '')}
+                    />
+                </View>
             </View>
-            <ScrollView style={{marginTop: 10}}>
-                    {
-                        dbRes.map((foodItem) => {
-                            return (
-                                <FoodItem key={foodItem.id} name={foodItem.name} price={foodItem.price}>
-                                    <TouchableOpacity
-                                        style={[styles.foodBtn, {marginRight: 5, backgroundColor: '#F39C12'}]}
-                                        onPress={() => showModal('edit', foodItem.id)}
-                                    >
-                                        <MaterialIcon size={25} name='edit' />
-                                    </TouchableOpacity>
-                                    <TouchableOpacity
-                                        style={[styles.foodBtn, {backgroundColor: '#E74C3C'}]}
-                                        onPress={() => showModal('delete', foodItem.id, foodItem.name, foodItem.category)}
-                                    >
-                                        <FontAwIcon size={25} name='times' />
-                                    </TouchableOpacity>
-                                </FoodItem>
-                            )
-                        })
-                    }
+            <ScrollView style={{ marginTop: 10 }}>
+                {
+                    dbRes.map((foodItem) => {
+                        return (
+                            <FoodItem key={foodItem.id} name={foodItem.name} price={foodItem.price}>
+                                <TouchableOpacity
+                                    style={[styles.foodBtn, { marginRight: 5, backgroundColor: '#F39C12' }]}
+                                    onPress={() => showModal('edit', foodItem.id)}
+                                >
+                                    <MaterialIcon size={25} name='edit' />
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={[styles.foodBtn, { backgroundColor: '#E74C3C' }]}
+                                    onPress={() => showModal('delete', foodItem.id, foodItem.name, foodItem.category)}
+                                >
+                                    <FontAwIcon size={25} name='times' />
+                                </TouchableOpacity>
+                            </FoodItem>
+                        )
+                    })
+                }
             </ScrollView>
-             <ModalAddForm 
-                modalVisible={modalVisible} 
-                handleVisibility={showModal} 
+            <ModalAddForm
+                modalVisible={modalVisible}
+                handleVisibility={showModal}
                 operation={modalOperation}
                 foodId={foodID}
                 refresh={refreshData}
             />
-             <ModalDeleteForm 
-                modalDeleteVisible={modalDeleteVisible}  
+            <ModalDeleteForm
+                modalDeleteVisible={modalDeleteVisible}
                 handleVisibility={showModal}
                 productId={foodID}
                 productName={foodName}
                 productCategory={foodCat}
-                refresh={refreshData} 
+                refresh={refreshData}
             />
         </ScrollView>
     )
@@ -212,6 +221,14 @@ const styles = StyleSheet.create({
         height: 60,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    deliveryIcon: {
+        width: 50,
+        height: 35,
+        backgroundColor: '#000',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: 5,
+        borderRadius: 2
     }
-
 });
