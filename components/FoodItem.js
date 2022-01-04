@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         backgroundColor: '#fff',
-        marginTop: 5
+        marginTop: 5,
+        height: 50
     },
     foodName: {
         flex: 2,
