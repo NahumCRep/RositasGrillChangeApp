@@ -147,18 +147,25 @@ const ModalAddForm = ({ modalVisible, handleVisibility, operation, foodId, refre
                             </View>
                             <View style={styles.formItem}>
                                 <Text style={styles.formLabel}>Categoria</Text>
-                                <SelectDropdown
-                                    defaultValueByIndex={dropDownIndex}
-                                    buttonStyle={styles.formSelector}
-                                    buttonTextStyle={{ fontSize: 15 }}
-                                    data={categories}
-                                    onSelect={(selectedItem) => {
-                                        setFoodObject({
-                                            ...foodObject,
-                                            foodcategory: selectedItem
-                                        })
-                                    }}
-                                />
+                                {
+                                    foodId == 'dev' ? 
+                                        <Text>Delivery</Text>
+                                        :
+                                        <SelectDropdown
+                                            defaultValueByIndex={dropDownIndex}
+                                            buttonStyle={styles.formSelector}
+                                            buttonTextStyle={{ fontSize: 15 }}
+                                            data={categories}
+                                            onSelect={(selectedItem) => {
+                                                setFoodObject({
+                                                    ...foodObject,
+                                                    foodcategory: selectedItem
+                                                })
+                                            }}
+                                        />
+
+                                }
+
                             </View>
                         </View>
                         <View style={styles.modalBtnView}>
