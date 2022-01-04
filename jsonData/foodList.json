@@ -214,7 +214,7 @@
             "id": "dev",
             "name": "Delivery",
             "price": 0.25,
-            "category": "devilery"
+            "category": "delivery"
         }
     ]
 }
