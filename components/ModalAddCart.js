@@ -48,7 +48,11 @@ const ModalAddCart = ({ modalVisible, handleVisibility, foodObject }) => {
     const addingOrder = () => {
         // console.log(foodOrder);
         orderContext.addOrder(foodOrder);
-        handleVisibility();
+        setFoodOrder({
+            ...foodOrder,
+            foodamount: '1'
+        })
+        handleVisibility();       
     }
 
     return (
