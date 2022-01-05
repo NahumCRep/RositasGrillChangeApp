@@ -4,11 +4,14 @@ import FontAwIcon from 'react-native-vector-icons/FontAwesome';
 import HeaderCategories from "../components/HeaderCategories";
 import FoodItem from "../components/FoodItem";
 import { openMyDatabase } from '../DataBaseConn/DataBaseConnection';
+import ModalAddCart from "../components/ModalAddCart";
 
 const db = openMyDatabase.getConnection();
 const Food = () => {
     const [menu, showMenu] = useState(false);
     const [dbRes, setdbRes] = useState([]);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [foodObject, setFoodObject] = useState({});
 
     useEffect(() => {
         if(!menu) setdbRes([]); 
@@ -39,6 +42,14 @@ const Food = () => {
     const handleData = (category) => {
         category ? getByCategory(category) : getData();
     }
+
+    const showModal = (fObject) => {
+        setModalVisible(!modalVisible);
+        // console.log(fObject);
+        if(fObject) setFoodObject(fObject);
+        // console.log(foodObject);
+    }
+
     return (
         <ScrollView style={{ paddingLeft: 5,paddingRight: 5}}>
             <View style={styles.rowcenter}>
@@ -64,7 +75,10 @@ const Food = () => {
                     dbRes.map((item) => {
                         return(
                             <FoodItem key={item.id} name={item.name} price={item.price}>
-                                <TouchableOpacity style={styles.addButton}>
+                                <TouchableOpacity 
+                                    style={styles.addButton}
+                                    onPress={() => showModal(item)}
+                                >
                                     <FontAwIcon name="plus" size={25} />
                                 </TouchableOpacity>
                             </FoodItem>
@@ -72,7 +86,7 @@ const Food = () => {
                     })
                 }
             </View>
-
+            <ModalAddCart modalVisible={modalVisible} handleVisibility={showModal} foodObject={foodObject} />
         </ScrollView>
     )
 }

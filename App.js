@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import AppNavigation from './components/AppNavigation';
 import { NavigationContainer } from '@react-navigation/native';
-
+import OrderState from './context/OrderState';
 import * as SQLite from 'expo-sqlite'
 
 function openDatabase() {
@@ -27,10 +27,12 @@ export default function App() {
       );
     });
   }, []);
-  
+
   return (
     <NavigationContainer>
-      <AppNavigation />
+      <OrderState>
+        <AppNavigation />
+      </OrderState>
     </NavigationContainer>
   );
 }

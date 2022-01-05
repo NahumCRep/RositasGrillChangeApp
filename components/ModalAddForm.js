@@ -16,7 +16,7 @@ const ModalAddForm = ({ modalVisible, handleVisibility, operation, foodId, refre
         foodid: '',
         foodname: '',
         foodprice: '',
-        foodcategory: 'comida'
+        foodcategory: 'desayuno'
     });
     const [dropDownIndex, setDropDownIndex] = useState(0);
 
@@ -25,20 +25,22 @@ const ModalAddForm = ({ modalVisible, handleVisibility, operation, foodId, refre
             foodid: '',
             foodname: '',
             foodprice: '',
-            foodcategory: 'comida'
+            foodcategory: 'desayuno'
         });
         setDropDownIndex(0);
     }
 
+    // const categories = ['comida', 'bebida', 'combo'];
+    const categories = ['desayuno', 'platano', 'carne', 'pollo', 'arroz', 'ensalada', 'bebida', 'combo'];
     const insertFood = (fID, fName, fPrice, fCategory) => {
         db.transaction(
             (tx) => {
                 tx.executeSql("insert into food (id, name, price, category) values (?, ?, ?, ?)",
-                    [fID, fName, fPrice, fCategory ? fCategory : 'comida'], (tx, success) => {
+                    [fID, fName, fPrice, fCategory ? fCategory : 'desayuno'], (tx, success) => {
                         alert('Producto Registrado Correctamente!!');
                         CleanInputs();
                         handleVisibility('add');
-                        refresh(fCategory ? fCategory : 'comida');
+                        refresh(fCategory ? fCategory : 'desayuno');
                     }, (tx, error) => {
                         console.log(error);
                     });
@@ -77,9 +79,14 @@ const ModalAddForm = ({ modalVisible, handleVisibility, operation, foodId, refre
                             foodprice: _array[0].price.toFixed(2).toString(),
                             foodcategory: _array[0].category.toString()
                         });
-                        if (_array[0].category == 'comida') setDropDownIndex(0)
-                        else if (_array[0].category == 'bebida') setDropDownIndex(1)
-                        else if (_array[0].category == 'combo') setDropDownIndex(2)
+                        if (_array[0].category == 'desayuno') setDropDownIndex(0)
+                        else if (_array[0].category == 'platano') setDropDownIndex(1)
+                        else if (_array[0].category == 'carne') setDropDownIndex(2)
+                        else if (_array[0].category == 'pollo') setDropDownIndex(3)
+                        else if (_array[0].category == 'arroz') setDropDownIndex(4)
+                        else if (_array[0].category == 'ensalada') setDropDownIndex(5)
+                        else if (_array[0].category == 'bebida') setDropDownIndex(6)
+                        else if (_array[0].category == 'combo') setDropDownIndex(7)
 
                     },
                         (tx, error) => console.log(error));
@@ -88,7 +95,8 @@ const ModalAddForm = ({ modalVisible, handleVisibility, operation, foodId, refre
         }
     }, [foodId])
 
-    const categories = ['comida', 'bebida', 'combo'];
+    
+
     return (
         <View style={styles.centeredView}>
             <Modal

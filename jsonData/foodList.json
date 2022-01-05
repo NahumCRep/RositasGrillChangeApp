@@ -28,145 +28,145 @@
             "id": "ord5",
             "name": "Empanada",
             "price": 0.50,
-            "category": "comida"
+            "category": "desayuno"
         },
         {
             "id": "ord6",
             "name": "Ojaldre",
             "price": 0.40,
-            "category": "comida"
+            "category": "desayuno"
         },
         {
             "id": "ord7",
             "name": "Salchicha frita",
             "price": 0.40,
-            "category": "comida"
+            "category": "desayuno"
         },
         {
             "id": "ord8",
             "name": "Huevo",
             "price": 0.30,
-            "category": "comida"
-        },
-        {
-            "id": "ord9",
-            "name": "Muslo",
-            "price": 0.80,
-            "category": "comida"
-        },
-        {
-            "id": "ord10",
-            "name": "Alitas",
-            "price": 0.65,
-            "category": "comida"
-        },
-        {
-            "id": "ord11",
-            "name": "Encuentro",
-            "price": 1.00,
-            "category": "comida"
-        },
-        {
-            "id": "ord12",
-            "name": "Pechuga",
-            "price": 1.25,
-            "category": "comida"
-        },
-        {
-            "id": "ord13",
-            "name": "Tortilla",
-            "price": 0.20,
-            "category": "comida"
-        },
-        {
-            "id": "ord14",
-            "name": "Queso amarillo",
-            "price": 0.25,
-            "category": "comida"
-        },
-        {
-            "id": "ord15",
-            "name": "Tortilla asada",
-            "price": 0.50,
-            "category": "comida"
+            "category": "desayuno"
         },
         {
             "id": "ord16",
             "name": "Tortilla asada con queso",
             "price": 0.85,
-            "category": "comida"
+            "category": "desayuno"
         },
         {
-            "id": "ord17",
-            "name": "Carne frita pequeña",
-            "price": 0.80,
-            "category": "comida"
+            "id": "ord13",
+            "name": "Tortilla",
+            "price": 0.20,
+            "category": "desayuno"
         },
         {
-            "id": "ord18",
-            "name": "Carne frita mediana",
-            "price": 1.00,
-            "category": "comida"
+            "id": "ord14",
+            "name": "Queso amarillo",
+            "price": 0.25,
+            "category": "desayuno"
         },
         {
-            "id": "ord19",
-            "name": "Carne frita grande",
-            "price": 1.20,
-            "category": "comida"
+            "id": "ord15",
+            "name": "Tortilla asada",
+            "price": 0.50,
+            "category": "desayuno"
         },
         {
             "id": "ord20",
             "name": "Yuca x2",
             "price": 0.25,
-            "category": "comida"
+            "category": "desayuno"
         },
         {
             "id": "ord21",
             "name": "Bollo",
             "price": 0.50,
-            "category": "comida"
+            "category": "desayuno"
         },
         {
             "id": "ord22",
             "name": "Moyeja unidad",
             "price": 0.20,
-            "category": "comida"
+            "category": "desayuno"
+        },
+        {
+            "id": "ord9",
+            "name": "Muslo",
+            "price": 0.80,
+            "category": "pollo"
+        },
+        {
+            "id": "ord10",
+            "name": "Alitas",
+            "price": 0.65,
+            "category": "pollo"
+        },
+        {
+            "id": "ord11",
+            "name": "Encuentro",
+            "price": 1.00,
+            "category": "pollo"
+        },
+        {
+            "id": "ord12",
+            "name": "Pechuga",
+            "price": 1.25,
+            "category": "pollo"
+        }, 
+        {
+            "id": "ord17",
+            "name": "Carne frita pequeña",
+            "price": 0.80,
+            "category": "carne"
+        },
+        {
+            "id": "ord18",
+            "name": "Carne frita mediana",
+            "price": 1.00,
+            "category": "carne"
+        },
+        {
+            "id": "ord19",
+            "name": "Carne frita grande",
+            "price": 1.20,
+            "category": "carne"
         },
         {
             "id": "ord23",
             "name": "Ensalada de papa",
             "price": 0.65,
-            "category": "comida"
+            "category": "ensalada"
         },
         {
             "id": "ord24",
             "name": "Ensalada verde",
             "price": 0.50,
-            "category": "comida"
+            "category": "ensalada"
         },
         {
             "id": "ord25",
             "name": "Orden de Arroz",
             "price": 0.50,
-            "category": "comida"
+            "category": "arroz"
         },
         {
             "id": "ord26",
             "name": "Orden Minestra",
             "price": 0.50,
-            "category": "comida"
+            "category": "arroz"
         },
         {
             "id": "ord27",
             "name": "Patacón unidad",
             "price": 0.05,
-            "category": "comida"
+            "category": "platano"
         },
         {
             "id": "ord28",
             "name": "Tajadas x2",
             "price": 0.25,
-            "category": "comida"
+            "category": "platano"
         },
         {
             "id": "ord29",

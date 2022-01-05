@@ -39,6 +39,22 @@ export const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5
     },
+    modalCart: {
+        width: 300,
+        height: 370,
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
     modalTitle: {
         flexDirection: 'row',
         width: 300,

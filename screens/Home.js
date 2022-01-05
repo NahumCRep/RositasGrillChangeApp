@@ -55,6 +55,21 @@ const Home = () => {
         );
     }, []);
 
+    // const addData = () => {
+    //     db.transaction(
+    //         (tx) => {
+    //             tx.executeSql(
+    //                 "create table if not exists food (id text primary key not null, name text, price real, category text);"
+    //             );
+    //             listado.food.map(item => {
+    //                 tx.executeSql("insert into food (id, name, price, category) values (?, ?, ?, ?)",
+    //                     [item.id, item.name, item.price, item.category]);
+    //             })
+    //         },
+    //         null
+    //     );
+    // }
+
     const getData = () => {
         db.transaction(
             (tx) => {
@@ -81,10 +96,10 @@ const Home = () => {
         category ? getByCategory(category) : getData();
     }
 
-    // const dropTable = () => {
+    // const deletefromTable = () => {
     //     db.transaction(tx => {
     //         tx.executeSql(
-    //             'DROP TABLE food;',
+    //             'delete from food;',
     //             [],(tx, results) => {
     //                 console.log('tabla eliminada')
     //             },
@@ -135,7 +150,7 @@ const Home = () => {
                     <Button
                         title='Agregar'
                         color='#000'
-                        onPress={() => showModal('add', '', '')}
+                        onPress={() => showModal('add','','')}
                     />
                 </View>
             </View>
