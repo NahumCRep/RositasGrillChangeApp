@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
     },
     modalCart: {
         width: 300,
-        height: 370,
+        height: 300,
         margin: 20,
         backgroundColor: "white",
         borderRadius: 20,
@@ -82,7 +82,8 @@ export const styles = StyleSheet.create({
         backgroundColor: '#D7DBDD',
         height: 35,
         padding: 10,
-        borderRadius: 10
+        borderRadius: 10,
+        textAlign: 'center'
     },
     formSelector: {
         backgroundColor: '#D7DBDD',

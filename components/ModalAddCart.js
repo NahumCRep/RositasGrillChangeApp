@@ -67,7 +67,7 @@ const ModalAddCart = ({ modalVisible, handleVisibility, foodObject }) => {
                         <View style={styles.modalTitle}>
                             <View style={{ height: 50, flex: 1, justifyContent: 'center' }}>
                                 <Text
-                                    style={[styles.modalText, { color: '#fff' }]}
+                                    style={[styles.modalText, { color: '#fff'}]}
                                 >
                                     Agregar a Orden
                                 </Text>
@@ -75,12 +75,12 @@ const ModalAddCart = ({ modalVisible, handleVisibility, foodObject }) => {
                         </View>
                         <View style={{ flex: 2, width: '100%', padding: 20 }}>
                             <View style={styles.formItem}>
-                                <Text style={[styles.formLabel, { borderBottomWidth: 2, borderBottomColor: '#fbc105' }]}>
+                                <Text style={[styles.formLabel, { borderBottomWidth: 2, borderBottomColor: '#fbc105',  textAlign: 'center'  }]}>
                                     {foodObject.name}
                                 </Text>
                             </View>
                             <View style={styles.formItem}>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 15 }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center',justifyContent: 'center', marginTop: 15 }}>
                                     <Text style={styles.formLabel}>Cantidad</Text>
                                     <TextInput
                                         style={[styles.formTInput, { width: 60, marginLeft: 6 }]}
@@ -93,7 +93,7 @@ const ModalAddCart = ({ modalVisible, handleVisibility, foodObject }) => {
                                     />
                                 </View>
                             </View>
-                            <View style={styles.formItem}>
+                            {/* <View style={styles.formItem}>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
                                     <BouncyCheckbox
                                         size={30}
@@ -124,9 +124,9 @@ const ModalAddCart = ({ modalVisible, handleVisibility, foodObject }) => {
                                     :
                                     null
                                 }
-                            </View>
+                            </View> */}
                         </View>
-                        <View style={styles.modalBtnView}>
+                        <View style={styles.modalBtnViewCenter}>
                             <TouchableOpacity
                                 style={[{ backgroundColor: '#000' }, styles.modalBtn]}
                                 onPress={addingOrder}

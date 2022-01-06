@@ -1,5 +1,5 @@
 import { Text, View, Button, ScrollView, StyleSheet, TouchableOpacity, TextInput } from "react-native";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import OrderContext from "../context/OrderContext";
 import FontAwIcon from 'react-native-vector-icons/FontAwesome';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
@@ -12,12 +12,18 @@ const Cart = () => {
     const [totalCost, setTotalCost] = useState(0);
     const [delivery, setDelivery] = useState(false);
     const [deliveryCost, setDeliveryCost] = useState(0);
-    const [payment, setPayment] = useState('');
+    const [extraCost, setExtraCost] = useState(0);
+    const [payment, setPayment] = useState(0);
     const [change, setChange] = useState(0);
+    const inputExtra = useRef(null);
+    const inputClient = useRef(null);
     let cost = 0;
     useEffect(() => {
-        if(orderContext.orders.length == 0){
-            setPayment('');
+        if (orderContext.orders.length == 0) {
+            setPayment(0);
+            setExtraCost(0);
+            inputExtra.current.clear();
+            inputClient.current.clear();
             setChange(0);
         }
         orderContext.orders.map((item) => {
@@ -28,6 +34,10 @@ const Cart = () => {
         // console.log(totalCost);
 
     }, [orderContext]);
+
+    // useEffect(()=>{
+
+    // }, [deliveryCost,extraCost])
 
     useEffect(() => {
         if (delivery) {
@@ -53,7 +63,7 @@ const Cart = () => {
     }
 
     const calculateChange = () => {
-        let clientchange = parseInt(payment) - (totalCost + deliveryCost)
+        let clientchange = parseInt(payment) - (totalCost + deliveryCost + extraCost);
         setChange(clientchange);
         // console.log(payment);
         // console.log(totalCost)
@@ -92,10 +102,10 @@ const Cart = () => {
                 <View>
                     <View style={styles.tableHeader}>
                         <Text style={[styles.columName, styles.boldFont]}>Total</Text>
-                        <Text style={{ flex: 1, marginRight: 10 }}>{'$' + (totalCost + deliveryCost).toFixed(2)}</Text>
+                        <Text style={[{ flex: 1, marginRight: 10 }, styles.boldFont]}>{'$' + (totalCost + deliveryCost + extraCost).toFixed(2)}</Text>
                     </View>
                     <View style={styles.bottomView}>
-                        <Text style={styles.boldFont}>Añadir costo de delivery</Text>
+                        <Text style={styles.boldFont}>Costo de delivery</Text>
                         <BouncyCheckbox
                             style={{ marginLeft: 10 }}
                             size={30}
@@ -105,15 +115,25 @@ const Cart = () => {
                             iconStyle={{ borderColor: "green" }}
                             onPress={() => setDelivery(!delivery)}
                         />
-
+                    </View>
+                    <View style={[styles.bottomView, { marginTop: 15 }]}>
+                        <Text style={styles.boldFont}>Costos extra: </Text>
+                        <TextInput
+                            ref={inputExtra}
+                            style={styles.inputNumeric}
+                            keyboardType="numeric"
+                            placeholder="0.00"
+                            onChangeText={(text) => setExtraCost(parseFloat(text) || 0)}
+                        />
                     </View>
                     <View style={[styles.bottomView, { marginTop: 15 }]}>
                         <Text style={styles.boldFont}>Dinero dado por el cliente: </Text>
                         <TextInput
+                            ref={inputClient}
                             style={styles.inputNumeric}
                             keyboardType="numeric"
-                            value={payment} 
-                            onChangeText={(text) => setPayment(text)}
+                            placeholder="0.00"
+                            onChangeText={(text) => setPayment(parseFloat(text) || 0)}
                         />
                     </View>
                     <TouchableOpacity
@@ -178,7 +198,7 @@ const styles = StyleSheet.create({
         height: 40,
         padding: 10,
         borderRadius: 10,
-        marginLeft: 10, 
+        marginLeft: 10,
         textAlign: 'center'
     },
     calculateButton: {
@@ -190,8 +210,8 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     changeText: {
-        fontSize: 25, 
-        marginTop: 20, 
+        fontSize: 25,
+        marginTop: 20,
         textAlign: 'center'
     }
 
