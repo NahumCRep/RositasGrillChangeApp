@@ -1,4 +1,4 @@
-import { Text, View, Button, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, Button, ScrollView, StyleSheet, TouchableOpacity, TextInput } from "react-native";
 import { useContext, useEffect, useState } from "react";
 import OrderContext from "../context/OrderContext";
 import FontAwIcon from 'react-native-vector-icons/FontAwesome';
@@ -12,23 +12,28 @@ const Cart = () => {
     const [totalCost, setTotalCost] = useState(0);
     const [delivery, setDelivery] = useState(false);
     const [deliveryCost, setDeliveryCost] = useState(0);
+    const [payment, setPayment] = useState('');
+    const [change, setChange] = useState(0);
     let cost = 0;
     useEffect(() => {
+        if(orderContext.orders.length == 0){
+            setPayment('');
+            setChange(0);
+        }
         orderContext.orders.map((item) => {
             cost += (item.foodprice * item.foodamount);
         });
         setTotalCost(cost);
+
         // console.log(totalCost);
 
     }, [orderContext]);
 
     useEffect(() => {
-        console.log(delivery);
         if (delivery) {
             handleDeliveryCost();
-        }else{
+        } else {
             setDeliveryCost(0);
-            console.log(deliveryCost);
         }
     }, [delivery])
 
@@ -38,13 +43,21 @@ const Cart = () => {
                 tx.executeSql("select price from food where id = ?",
                     ['dev'], (_, { rows: { _array } }) => {
                         // setDelivery(_array[0].price);
-                        console.log(_array[0].price);
+                        // console.log(_array[0].price);
                         setDeliveryCost(_array[0].price);
                     }, (tx, error) => {
                         console.log(error);
                     });
             }
         );
+    }
+
+    const calculateChange = () => {
+        let clientchange = parseInt(payment) - (totalCost + deliveryCost)
+        setChange(clientchange);
+        // console.log(payment);
+        // console.log(totalCost)
+        // console.log(deliveryCost)
     }
 
     return (
@@ -81,7 +94,7 @@ const Cart = () => {
                         <Text style={[styles.columName, styles.boldFont]}>Total</Text>
                         <Text style={{ flex: 1, marginRight: 10 }}>{'$' + (totalCost + deliveryCost).toFixed(2)}</Text>
                     </View>
-                    <View style={styles.deliveryView}>
+                    <View style={styles.bottomView}>
                         <Text style={styles.boldFont}>Añadir costo de delivery</Text>
                         <BouncyCheckbox
                             style={{ marginLeft: 10 }}
@@ -93,6 +106,25 @@ const Cart = () => {
                             onPress={() => setDelivery(!delivery)}
                         />
 
+                    </View>
+                    <View style={[styles.bottomView, { marginTop: 15 }]}>
+                        <Text style={styles.boldFont}>Dinero dado por el cliente: </Text>
+                        <TextInput
+                            style={styles.inputNumeric}
+                            keyboardType="numeric"
+                            value={payment} 
+                            onChangeText={(text) => setPayment(text)}
+                        />
+                    </View>
+                    <TouchableOpacity
+                        style={styles.calculateButton}
+                        onPress={calculateChange}
+                    >
+                        <Text style={styles.boldFont}>CALCULAR VUELTO</Text>
+                    </TouchableOpacity>
+                    <View>
+                        <Text style={[styles.boldFont, styles.changeText]}>Dinero a devolver</Text>
+                        <Text style={[styles.boldFont, styles.changeText]}>{`$ ${change.toFixed(2)}`}</Text>
                     </View>
                 </View>
             </View>
@@ -134,11 +166,33 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 5
     },
-    deliveryView: {
+    bottomView: {
         flexDirection: 'row',
         alignItems: 'center',
         height: 50,
         paddingLeft: 5
+    },
+    inputNumeric: {
+        backgroundColor: '#D7DBDD',
+        width: 70,
+        height: 40,
+        padding: 10,
+        borderRadius: 10,
+        marginLeft: 10, 
+        textAlign: 'center'
+    },
+    calculateButton: {
+        width: '100%',
+        height: 70,
+        backgroundColor: '#fbc105',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 20
+    },
+    changeText: {
+        fontSize: 25, 
+        marginTop: 20, 
+        textAlign: 'center'
     }
 
 })

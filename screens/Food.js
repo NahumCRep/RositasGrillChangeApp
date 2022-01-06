@@ -1,10 +1,11 @@
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import FontAwIcon from 'react-native-vector-icons/FontAwesome';
 import HeaderCategories from "../components/HeaderCategories";
 import FoodItem from "../components/FoodItem";
 import { openMyDatabase } from '../DataBaseConn/DataBaseConnection';
 import ModalAddCart from "../components/ModalAddCart";
+import OrderContext from "../context/OrderContext";
 
 const db = openMyDatabase.getConnection();
 const Food = () => {
@@ -12,9 +13,13 @@ const Food = () => {
     const [dbRes, setdbRes] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [foodObject, setFoodObject] = useState({});
+    const orderContext = useContext(OrderContext);
 
     useEffect(() => {
-        if(!menu) setdbRes([]); 
+        if(!menu) {
+            setdbRes([]);
+            orderContext.clearAll();
+        }; 
     }, [menu])
 
     const getData = () => {
