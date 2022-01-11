@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.nahumcascoweb.rositaschangeapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"

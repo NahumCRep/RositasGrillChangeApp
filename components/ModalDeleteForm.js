@@ -33,7 +33,7 @@ const ModalDeleteForm = ({ modalDeleteVisible, handleVisibility, productId, prod
                             </View>
                         </View>
                         <View style={{ flex: 2, width: '100%', padding: 20 }}>
-                            <Text style={{ textAlign: 'center' }}>Está seguto que quiere eliminar el producto?</Text>
+                            <Text style={{ textAlign: 'center' }}>Está seguro que quiere eliminar el producto?</Text>
                             <Text style={{ textAlign: 'center', marginTop: 15, color: '#f00' }}>{productName}</Text>
                         </View>
                         <View style={styles.modalBtnViewCenter}>
