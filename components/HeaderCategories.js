@@ -4,25 +4,25 @@ const HeaderCategories = ({ handleGetData }) => {
         <View>
             <View style={styles.buttonsView}>
                 <TouchableOpacity
-                    style={[styles.touchBtn, { backgroundColor: '#ff5100' }]}
+                    style={[styles.touchBtn, { backgroundColor: '#F1C40F' }]}
                     onPress={() => handleGetData('combo')}
                 >
                     <Text>Combos</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={[styles.touchBtn, { backgroundColor: '#fbc105' }]}
+                    style={[styles.touchBtn, { backgroundColor: '#F4D03F' }]}
                     onPress={() => handleGetData('desayuno')}
                 >
                     <Text>Desayunos</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={[styles.touchBtn, { backgroundColor: '#F39C12' }]}
+                    style={[styles.touchBtn, { backgroundColor: '#F1C40F' }]}
                     onPress={() => handleGetData('platano')}
                 >
                     <Text>Plátano</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={[styles.touchBtn, { backgroundColor: '#85592d' }]}
+                    style={[styles.touchBtn, { backgroundColor: '#F4D03F' }]}
                     onPress={() => handleGetData('carne')}
                 >
                     <Text>Carne</Text>
@@ -30,25 +30,25 @@ const HeaderCategories = ({ handleGetData }) => {
             </View>
             <View style={[styles.buttonsView, {marginTop: 0}]}>
                 <TouchableOpacity
-                    style={[styles.touchBtn, { backgroundColor: '#ff5100' }]}
+                    style={[styles.touchBtn, { backgroundColor: '#F4D03F' }]}
                     onPress={() => handleGetData('pollo')}
                 >
                     <Text>Pollo</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={[styles.touchBtn, { backgroundColor: '#fbc105' }]}
+                    style={[styles.touchBtn, { backgroundColor: '#F1C40F' }]}
                     onPress={() => handleGetData('arroz')}
                 >
                     <Text style={{textAlign: 'center'}}>Arroz / Minestra</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={[styles.touchBtn, { backgroundColor: '#F39C12' }]}
+                    style={[styles.touchBtn, { backgroundColor: '#F4D03F' }]}
                     onPress={() => handleGetData('ensalada')}
                 >
                     <Text>Ensaladas</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={[styles.touchBtn, { backgroundColor: '#85592d' }]}
+                    style={[styles.touchBtn, { backgroundColor: '#F1C40F' }]}
                     onPress={() => handleGetData('bebida')}
                 >
                     <Text>Bebidas</Text>
@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
     },
     touchBtn: {
         flex: 1,
-        // width: 90,
         height: 60,
         justifyContent: 'center',
         alignItems: 'center'
