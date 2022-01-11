@@ -9,7 +9,6 @@ import {
     TouchableOpacity
 } from 'react-native';
 import logo from '../assets/logoName.png';
-import * as SQLite from 'expo-sqlite';
 import FoodItem from '../components/FoodItem';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import FontAwIcon from 'react-native-vector-icons/FontAwesome';
@@ -29,21 +28,8 @@ const Home = () => {
     const [foodID, setFoodID] = useState('');
     const [foodName, setFoodName] = useState('');
     const [foodCat, setFoodCategory] = useState('');
-    // useEffect(() => {
-    //     db.transaction(
-    //         (tx) => {
-    //             tx.executeSql("insert into food (id, name, price, category) values (?, ?, ?, ?)",
-    //                 ['dev', 'Delivery', 0.25, 'delivery']);
-    //             // tx.executeSql("select * from food", [], (_, { rows }) =>
-    //             //     console.log(JSON.stringify(rows))
-    //             // );
-    //         },
-    //         null
-    //     );
-    // }, []);
 
     useEffect(() => {
-        // console.log(listado.food[0]);
         db.transaction(
             (tx) => {
                 listado.food.map(item => {
@@ -54,21 +40,6 @@ const Home = () => {
             null
         );
     }, []);
-
-    // const addData = () => {
-    //     db.transaction(
-    //         (tx) => {
-    //             tx.executeSql(
-    //                 "create table if not exists food (id text primary key not null, name text, price real, category text);"
-    //             );
-    //             listado.food.map(item => {
-    //                 tx.executeSql("insert into food (id, name, price, category) values (?, ?, ?, ?)",
-    //                     [item.id, item.name, item.price, item.category]);
-    //             })
-    //         },
-    //         null
-    //     );
-    // }
 
     const getData = () => {
         db.transaction(
@@ -96,20 +67,6 @@ const Home = () => {
         category ? getByCategory(category) : getData();
     }
 
-    // const deletefromTable = () => {
-    //     db.transaction(tx => {
-    //         tx.executeSql(
-    //             'delete from food;',
-    //             [],(tx, results) => {
-    //                 console.log('tabla eliminada')
-    //             },
-    //             (tx, error) => {
-    //                 console.log(error);
-    //             }
-    //         )
-    //     });
-    // }
-
     const setFoodProps = (id, name, category) => {
         id ? setFoodID(id) : setFoodID('');
         name ? setFoodName(name) : setFoodName('');
@@ -127,7 +84,6 @@ const Home = () => {
         }
     }
     const refreshData = (category) => {
-        // getData();
         handleData(category);
     }
 

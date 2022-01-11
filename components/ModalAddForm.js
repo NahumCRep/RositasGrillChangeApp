@@ -30,7 +30,6 @@ const ModalAddForm = ({ modalVisible, handleVisibility, operation, foodId, refre
         setDropDownIndex(0);
     }
 
-    // const categories = ['comida', 'bebida', 'combo'];
     const categories = ['desayuno', 'platano', 'carne', 'pollo', 'arroz', 'ensalada', 'bebida', 'combo'];
     const insertFood = (fID, fName, fPrice, fCategory) => {
         db.transaction(
@@ -70,9 +69,6 @@ const ModalAddForm = ({ modalVisible, handleVisibility, operation, foodId, refre
             db.transaction(
                 (tx) => {
                     tx.executeSql("select * from food where id = ?", [foodId], (_, { rows: { _array } }) => {
-                        // setdbRes(_array)
-                        // console.log(_array[0]);
-                        // let precio = _array[0].price.toString();
                         setFoodObject({
                             foodid: _array[0].id,
                             foodname: _array[0].name,

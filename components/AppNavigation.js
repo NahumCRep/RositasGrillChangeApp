@@ -1,4 +1,3 @@
-import { View } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Constants from 'expo-constants';
@@ -41,7 +40,6 @@ const AppNavigation = () => {
                 tabBarIndicatorStyle: {
                     backgroundColor: '#D68910',
                 },
-                // tabBarStyle: { backgroundColor: 'powderblue' },
             }}
         >
             <Tab.Screen options={TabOptions.home} name="Home" component={Home} />

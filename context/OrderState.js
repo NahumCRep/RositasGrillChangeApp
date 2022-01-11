@@ -10,7 +10,6 @@ const OrderState = ({ children }) => {
 
     // Action creators
     const addOrder = (orderObject) => {
-        // console.log(orderObject);
         dispatch({ type: ADD_ORDER, payload: orderObject });
     }
 

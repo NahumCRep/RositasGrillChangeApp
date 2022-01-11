@@ -50,9 +50,7 @@ const Food = () => {
 
     const showModal = (fObject) => {
         setModalVisible(!modalVisible);
-        // console.log(fObject);
         if(fObject) setFoodObject(fObject);
-        // console.log(foodObject);
     }
 
     return (

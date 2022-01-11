@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import { styles } from './ModalStyles';
 import { openMyDatabase } from '../DataBaseConn/DataBaseConnection';
-import BouncyCheckbox from "react-native-bouncy-checkbox";
 import OrderContext from "../context/OrderContext";
 
 const db = openMyDatabase.getConnection();
@@ -33,10 +32,6 @@ const ModalAddCart = ({ modalVisible, handleVisibility, foodObject }) => {
         });
     }, [foodObject]);
 
-    // const showOrderData = () => {
-    //     console.log(foodOrder);
-    // }
-
     const handleExtra = () => {
         setExtra(!extra);
         setFoodOrder({
@@ -46,7 +41,6 @@ const ModalAddCart = ({ modalVisible, handleVisibility, foodObject }) => {
     }
 
     const addingOrder = () => {
-        // console.log(foodOrder);
         orderContext.addOrder(foodOrder);
         setFoodOrder({
             ...foodOrder,
@@ -93,38 +87,6 @@ const ModalAddCart = ({ modalVisible, handleVisibility, foodObject }) => {
                                     />
                                 </View>
                             </View>
-                            {/* <View style={styles.formItem}>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
-                                    <BouncyCheckbox
-                                        size={30}
-                                        fillColor="green"
-                                        unfillColor="#FFFFFF"
-                                        text=""
-                                        iconStyle={{ borderColor: "green" }}
-                                        onPress={handleExtra}
-                                    />
-                                    <Text style={styles.formLabel}>Extra</Text>
-                                </View>
-                            </View>
-                            <View style={styles.formItem}>
-                                {
-                                    extra
-                                    ?
-                                    <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
-                                        <Text style={styles.formLabel}>Cantidad</Text>
-                                        <TextInput
-                                            style={[styles.formTInput, { width: 60, marginLeft: 6 }]}
-                                            keyboardType="numeric"
-                                            onChangeText={(text) => setFoodOrder({
-                                                ...foodOrder,
-                                                foodextra: text
-                                            })}
-                                        />
-                                    </View>
-                                    :
-                                    null
-                                }
-                            </View> */}
                         </View>
                         <View style={styles.modalBtnViewCenter}>
                             <TouchableOpacity

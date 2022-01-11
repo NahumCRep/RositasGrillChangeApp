@@ -30,14 +30,7 @@ const Cart = () => {
             cost += (item.foodprice * item.foodamount);
         });
         setTotalCost(cost);
-
-        // console.log(totalCost);
-
     }, [orderContext]);
-
-    // useEffect(()=>{
-
-    // }, [deliveryCost,extraCost])
 
     useEffect(() => {
         if (delivery) {
@@ -52,8 +45,6 @@ const Cart = () => {
             (tx) => {
                 tx.executeSql("select price from food where id = ?",
                     ['dev'], (_, { rows: { _array } }) => {
-                        // setDelivery(_array[0].price);
-                        // console.log(_array[0].price);
                         setDeliveryCost(_array[0].price);
                     }, (tx, error) => {
                         console.log(error);
@@ -65,9 +56,6 @@ const Cart = () => {
     const calculateChange = () => {
         let clientchange = parseInt(payment) - (totalCost + deliveryCost + extraCost);
         setChange(clientchange);
-        // console.log(payment);
-        // console.log(totalCost)
-        // console.log(deliveryCost)
     }
 
     return (
