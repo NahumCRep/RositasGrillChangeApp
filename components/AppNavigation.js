@@ -1,7 +1,7 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Constants from 'expo-constants';
-import { Home, Food, Cart } from '../screens';
+import { Home, Food, Cart, Sellings } from '../screens';
 
 const TabOptions = {
     home:{
@@ -27,7 +27,15 @@ const TabOptions = {
                 name={focused ? 'cart' : 'cart-outline'}
                 color= {focused ? '#D68910' : '#212F3D'} 
             />,
-    }         
+    },
+    sellings:{
+        title: ({focused}) => 
+            <Icon 
+                size={30} 
+                name={focused ? 'wallet' : 'wallet-outline'}
+                color= {focused ? '#D68910' : '#212F3D'} 
+            />,
+    }          
 }
 const Tab = createMaterialTopTabNavigator();
 const AppNavigation = () => {
@@ -45,6 +53,7 @@ const AppNavigation = () => {
             <Tab.Screen options={TabOptions.home} name="Home" component={Home} />
             <Tab.Screen options={TabOptions.food} name="Food" component={Food} />
             <Tab.Screen options={TabOptions.cart} name="Order" component={Cart} />
+            <Tab.Screen options={TabOptions.sellings} name="Sellings" component={Sellings} />
         </Tab.Navigator>
     )
 }

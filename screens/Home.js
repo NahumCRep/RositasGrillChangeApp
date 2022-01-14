@@ -41,6 +41,18 @@ const Home = () => {
         );
     }, []);
 
+    const insertData = () => {
+        db.transaction(
+            (tx) => {
+                listado.food.map(item => {
+                    tx.executeSql("insert into food (id, name, price, category) values (?, ?, ?, ?)",
+                        [item.id, item.name, item.price, item.category]);
+                })
+            },
+            null
+        );
+    }
+
     const getData = () => {
         db.transaction(
             (tx) => {
@@ -107,6 +119,7 @@ const Home = () => {
                         title='Agregar'
                         color='#000'
                         onPress={() => showModal('add','','')}
+                        // onPress={insertData}
                     />
                 </View>
             </View>

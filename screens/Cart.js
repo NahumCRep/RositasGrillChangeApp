@@ -53,9 +53,38 @@ const Cart = () => {
         );
     }
 
+    const formatDate = (year, month, day) => {
+        month < 10 ? month = '0' + month : month;
+        day < 10 ? day = '0' + day : day;
+        let formatedDate = year + '-' + month + '-' + day;
+        return formatedDate;
+    }
+
+    const registerSelling = (totalselling) => {
+        let systemDate = new Date();
+        let actualDate = formatDate(systemDate.getFullYear(), systemDate.getMonth() + 1, systemDate.getDate());
+        if (totalselling != 0) {
+            db.transaction(
+                (tx) => {
+                    tx.executeSql("insert into sellings (selldate, total) values (?, ?)",
+                        [actualDate, totalselling], (tx, success) => {
+                            console.log("venta registrada correctamente");
+                        }, (tx, error) => {
+                            console.log(error);
+                        });
+                }
+            );
+        }
+    }
+
     const calculateChange = () => {
-        let clientchange = parseInt(payment) - (totalCost + deliveryCost + extraCost);
-        setChange(clientchange);
+        if (payment == 0 || payment == "") {
+            alert('Ingrese el dinero dado por el cliente');
+        } else {
+            let clientchange = parseInt(payment) - (totalCost + deliveryCost + extraCost);
+            setChange(clientchange);
+            registerSelling(totalCost + deliveryCost + extraCost);
+        }
     }
 
     return (

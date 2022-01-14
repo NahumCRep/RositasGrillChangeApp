@@ -25,6 +25,9 @@ export default function App() {
       tx.executeSql(
         "create table if not exists food (id text primary key not null, name text, price real, category text);"
       );
+      tx.executeSql(
+        "'create table if not exists sellings (id integer primary key autoincrement, selldate text, total real);'"
+      );
     });
   }, []);
 
